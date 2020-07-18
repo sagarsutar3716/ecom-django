@@ -1,0 +1,75 @@
+
+.box-element a {
+ 
+    text-decoration:none;
+    color: black;
+    font-family: 'Josefin Sans', sans-serif;
+    
+}
+
+.box-element .price{
+    color: red;
+    font-size: 14px;
+}
+
+h3,h4,.titles{
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h4.titles{
+    font-weight: 300;
+}
+
+.clasic{
+font-weight: 200;
+}
+
+h4.title{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h5.title{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.thumbnail{
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    display: block;
+    text-align: center;
+}
+
+.thumbnail:hover
+{
+width: 110%;
+height: 400px;
+}
+
+.container .banner{
+    width: 100%;
+}
+
+.title-last{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.top-banner1{
+    height: 200px;
+}
+

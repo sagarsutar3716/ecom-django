@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+{% block content %}
+<script src="{% static 'js/cart.js' %}" async></script>
+
+<style>
+    h2 {
+        margin-top: 40px;
+        text-align: center;
+        font-weight: 600;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    h5,
+    h6 {
+        text-align: center;
+        font-weight: 400;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .box-element {
+        box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .row-image {
+        width: 100px;
+    }
+
+    .cart-rows {
+        font-weight: 500;
+        font-family: 'Times New Roman', Times, serif;
+        display: flex;
+        align-items: 'flex-stretch';
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ececec;
+    }
+
+    .cart-rows strong {
+        text-transform: uppercase;
+        margin-right: 93px;
+        margin-left: -13px;
+    }
+
+    .cart-row {
+        font-weight: 500;
+        font-family: 'Times New Roman', Times, serif;
+        display: flex;
+        align-items: 'flex-stretch';
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ececec;
+
+    }
+
+    button {
+        float: right;
+        height: 60px;
+        width: 135px;
+        background-color: black;
+        color: white;
+    }
+
+    .btn-danger {
+        color: white;
+        background-color: #EB5757;
+        border: none;
+        border-radius: .3em;
+        font-weight: bold;
+        width: 100px;
+        height: 37px;
+    }
+
+    .btn-danger:hover {
+        background-color: #CC4C4C;
+    }
+
+    .cart-quantity-input {
+        height: 34px;
+        width: 50px;
+        border-radius: 5px;
+        border: 1px solid #56CCF2;
+        background-color: #eee;
+        color: #333;
+        padding: 0;
+        text-align: center;
+        font-size: 1.2em;
+        margin-right: 25px;
+    }
+
+    .remove {
+        margin-right: 22px;
+        margin-top: -1px;
+    }
+
+    .cart-total {
+        margin-top: 10px;
+        padding-right: 15px;
+    }
+</style>
+
+<br><br><br><br><br>
+<h2> Your TrenDy Cart</h2>
+<h6>Cash On Delivery charges Rs.49</h6>
+<hr>
+<div class="box-element cart-prods">
+    <div class="cart-rows">
+        <div style="flex:2"></div>
+        <div style="flex:1.5"><strong>product</strong></div>
+        <div style="flex:2"><strong>Price</strong></div>
+    </div>
+    <div id="items">
+    </div>
+</div>
+<div class="cart-total float-right">
+    <strong class="cart-total-title">Total:</strong>
+    <span class="cart-total-price">Rs.0<span>
+</div><br>
+<hr>
+
+<a href="/checkout"><button>CHECKOUT</button></a>
+{% endblock content %}
+
+{% block js %}
+
+<script async>
+    if (document.readyState == 'loading') {
+        document.addEventListener('DOMContentLoaded', ready)
+    }
+    else {
+        ready()
+    }
+
+    function ready() {
+        var removeCartItemButton = document.getElementsByClassName('btn-danger')
+        for (var i = 0; i < removeCartItemButton.length; i++) {
+            var button = removeCartItemButton[i]
+            button.addEventListener('click', removeCartItem)
+        }
+    }
+
+    function removeCartItem(itemIndex) {
+        itemJsonArrayStr = localStorage.getItem('itemsJson')
+        itemJsonArray = JSON.parse(itemJsonArrayStr);
+        var buttonClicked = event.target
+        buttonClicked.parentElement.parentElement.remove(itemJsonArray.splice(itemIndex, 1))
+        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+
+        UpdateCartTotal()
+    }
+
+    function UpdateCartTotal() {
+        var cartItemContainer = document.getElementsByClassName('cart-prods')[0]
+        var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+        var total = 0
+        for (var i = 0; i < cartRows.length; i++) {
+            var cartRow = cartRows[i]
+            var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+
+            var price = parseFloat(priceElement.innerText.replace('Rs.', ''))
+
+            total = total + (price)
+        }
+        document.getElementsByClassName('cart-total-price')[0].innerText = 'Rs.' + total
+    }
+
+    /* showing localStorage products on cart */
+
+    if (localStorage.getItem('itemsJson') == null) {
+        var itemsJson = {};
+    }
+
+    else {
+        itemsJson = JSON.parse(localStorage.getItem('itemsJson'));
+    }
+
+    for (item in itemsJson) {
+
+        let name = itemsJson[item][1];
+        let price = itemsJson[item][2];
+        let image = itemsJson[item][0];
+
+        mystr = ` <div class = "cart-row"><div style="flex:2"><img class="row-image" src="${image}"></div>
+        <div style="flex:1.8">
+            <p>${name}</p>
+        </div>
+        <div style="flex:1.6">
+            <span class="cart-price">${price}</span>
+        </div>
+        <div class="cart-quantity cart-column">
+
+        <button class="btn btn-danger remove" onclick = "removeCartItem (${name})" type="button">REMOVE</button>
+            </div>
+</div>
+        `
+        $('#items').append(mystr);
+        UpdateCartTotal()
+    }
+</script>
+
+{% endblock js %}

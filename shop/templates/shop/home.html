@@ -1,0 +1,178 @@
+
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+
+{% block content %}
+
+<style>
+    /*.top-banner-rd{
+    height: 202px;
+    width: 200px;
+    border: 1px solid white;
+    margin-left: 100px;
+    border-radius: 200px;
+    margin-top: 10px;
+    margin-bottom: 45px;
+    }
+    .lefts{
+        margin-left: 170px;
+    }*/
+
+
+.top-banner  {
+    width: 100%;
+    height: 400px;
+    margin-top: 16px;
+}
+
+@media screen and (max-width: 995px){
+    .top-banner{
+        margin-top: 135px;
+    }
+}
+</style>
+<img class="top-banner" src="{% static 'images/banner.png' %}" alt="">
+
+<!--<img class="top-banner-rd lefts" src="{% static 'images/Teal-blue-banner.jpg' %}" alt="">
+
+<img class="top-banner-rd" src="{% static 'images/Green-5.jpg' %}" alt="">
+
+<img class="top-banner-rd" src="{% static 'images/light-blue-2.jpg' %}" alt="">-->
+
+
+<h3 class="titles">Tactile - The Knit Shirt</h3>
+<h4 class="titles">A Stunning Texture</h4>
+
+<div class="row">
+    {% for product in products|slice:":5" %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<h3 class="titles"> Comfort | Feel | Fit</h3>
+<h4 class="titles">( Perfect for everyday life )</h4>
+
+<div class="row">
+    {% for product in products|slice:"5:9"  %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h3 class="titles">THE CLASSIC SHIRT</h3>
+<h4 class="titles">( CAUGHT YOUR FORMALS & EVENINGS )</h4>
+
+<div class="row">
+    {% for product in products|slice:"9:14"  %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h4 class="title"> POLO </h4>
+<h5 class="title">( By TrenDy )</h5>
+
+<div class="row">
+    {% for product in products|slice:"14:16"  %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h4 class="title"> Shirts with a different style</h4>
+<h5 class="title">( An another simplicity level )</h5>
+
+<div class="row">
+    {% for product in products|slice:"16:22"  %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container"><img class="banner" src="{% static 'images/clearence.png' %}"></div>
+
+<h5 class="title-last">A perfect zone to catch limitless deals which you never wanna miss out ✌</h5>
+
+<div class="row">
+    {% for product in products|slice:"22:29"  %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h4>Best's By TrenDy </h4>
+<div class="row">
+    {% for product in products|slice:"29:"  %}
+    <div class="col-sm-3 my-4">
+        <a id="qv{{tectile.id}}" href="products/{{product.id}}"><img class="thumbnail" src="{{product.image.url}}"></a>
+        <div class="box-element">
+            <a href="products/{{product.id}}">
+                <h5>{{product.name}}</h5>
+            </a>
+            <a href="products/{{product.id}}">
+                <h5 class="price">Rs.{{product.price}}</h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+<style>
+  .container {
+    margin-top: -22px;
+  }
+
+  .container {
+    margin-top: 20px;
+  }
+
+  button {
+    background: linear-gradient(90deg, #303030, #0a0a0a);
+    color: white;
+    width: 500px;
+    height: 54px;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .text-style {
+    border: 1px solid black;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    height: 20px;
+    width: 300px;
+    margin-left: 90px;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+  }
+
+  h6 .text-style {
+    padding-top: 1px;
+  }
+
+  .leading-relaxed {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .str {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  }
+
+  .font-medium {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .product-price {
+    margin-left: 30%;
+    font-size: x-large
+  }
+</style>
+<hr>
+<section class="text-gray-700 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto shop-item ">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <img id="primg" alt="TrenDy"
+        class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded shop-item-image"
+        src="{{product.image.url}}">
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 shop-item">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest my-1">TrenDy</h2>
+        <h1 id="prname" class="text-gray-900 text-3xl title-font font-medium mb-1 shop-item-title my-2 mb-2">
+          {{product.name}}</h1>
+        <b class="str">Stretchable | Soft | Durable</b>
+        <p class="leading-relaxed text-gray-900 my-2">{{product.desc}}</p>
+        <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
+        </div>
+        <h6 class="text-style">TRY ONE YOU GONNA ❤ IT.</h6><br>
+        <span id="prprice"
+          class="title-font font-medium text-2xl text-gray-900 product-price shop-item-price"><b>Rs.{{product.price}}</b></span><br>
+        <br>
+        <button id="pr{{product.id}}" class="cart">Add To Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+<script>
+
+  function update() {
+    tit = document.getElementById('prname').innerText
+    prc = document.getElementById('prprice').innerText
+    im = document.getElementById('primg').src
+    if (localStorage.getItem('itemsJson') == null) {
+      itemJsonArray = [];
+      itemJsonArray.push([im, tit, prc]);
+      localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+    }
+    else {
+      itemJsonArrayStr = localStorage.getItem('itemsJson')
+      itemJsonArray = JSON.parse(itemJsonArrayStr);
+      itemJsonArray.push([im, tit, prc]);
+      localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+    }
+    alert('Item Added to Your Trendy Cart. :)');
+  }
+  add = document.getElementById("pr{{product.id}}");
+  add.addEventListener("click", update);
+
+</script>
+{% endblock js %}
