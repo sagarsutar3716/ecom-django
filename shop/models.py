@@ -1,5 +1,9 @@
 from django.db import models
 
+from datetime import date 
+from django.utils import timezone
+
+
 # Create your models here.
 
 class Product(models.Model):
@@ -16,7 +20,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
-    items_json = models.CharField(max_length=5000)
+    items_json = models.JSONField(max_length=5000)
     name = models.CharField(max_length=70)
     email = models.CharField(max_length=100)
     address = models.CharField(max_length=300)
@@ -24,6 +28,8 @@ class Order(models.Model):
     state = models.CharField(max_length=25) 
     zip_code = models.CharField(max_length=50)
     phone = models.CharField(max_length=20)
+    date = models.DateTimeField(default=timezone.now)
+    prod_name = models.ManyToManyField(Product)
 
     def __str__(self):
         return self.name
